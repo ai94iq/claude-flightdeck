@@ -342,7 +342,9 @@ export const register: Register = (on, options) => {
         limits: u.rateLimits.map(limitOf),
       }))
     }
-    if (cfg.openOnStart) void openPane($, cfg).catch(() => undefined)
+    // Herdr has its own Flightdeck panel; a docked pane there garbles the terminal's mouse input.
+    const inHerdr = await $.env.get('HC_TERMINAL_ID').catch(() => undefined)
+    if (cfg.openOnStart && !inHerdr) void openPane($, cfg).catch(() => undefined)
     startFeed($)
     await refreshStatus($, cfg)
     const done = await next(e)

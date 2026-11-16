@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.3
+
+- Inside a Herdr terminal the pane no longer opens by itself at session start. Herdr has its own Flightdeck panel, and the docked pane left mouse reports typed into the shell after Claude Code exited. `/flightdeck` still opens it there.
+
 ## 0.7.2
 
 - The web view no longer scrolls sideways on narrow windows. Grid tracks shrink below their content, the main box keeps its three meters inside it and stacks them under 600px, and the tool trail keeps a readable path with the tally hidden on small screens.

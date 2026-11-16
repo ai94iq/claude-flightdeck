@@ -727,6 +727,17 @@ test('the docked pane asks for the width set in paneColumns', { options: { paneC
   expect(asked).toEqual([46])
 })
 
+test('inside a Herdr terminal the pane does not open by itself', async ($, on) => {
+  engine(on)
+  const asked: string[] = []
+  on('session.start', (_$, e) => ({ cwd: e.cwd }))
+  on('command.register', (_$, e) => ({ value: { command: e.name } }))
+  on('env.get', (_$, e) => ({ value: e.name === 'HC_TERMINAL_ID' ? 't1' : undefined }))
+  on('ui.open', (_$, e) => (asked.push(e.id), { value: { isPlaced: true as const } }))
+  await $.session.start({ cwd: '/w', surface: 'terminal', isInteractive: true })
+  expect(asked).toEqual([])
+})
+
 test('the status line leaves out the ctx percent unless contextWarning is on', async ($, on) => {
   mock.clock(on)
   let status: string | undefined = 'unset'
