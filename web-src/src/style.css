@@ -104,3 +104,13 @@ body,body *{transition:color .2s ease-out,background-color .2s ease-out,border-c
 /* Box headers read as one line: the counts beside a title stay at body size. */
 .row:has(.ttl) .meta{font-size:var(--fs-body)}
 .focus .ftitle{font-size:var(--fs-body)}
+
+/* Hardening: no box may grow past its column; grid tracks shrink below their content instead of pushing the page wide. */
+.top>*,.grid>*,.mainband,.meter,.meters>*,.fcols>*{min-width:0}
+.mainband{overflow:hidden}
+.meter .row{gap:.5ch;min-width:0}
+.meter .row .r{flex:none;margin-left:auto}
+.ftrail .row .t,.ftally .row{min-width:0}
+.ftrail .row{overflow:hidden}
+@media (max-width:900px){.top{grid-template-columns:minmax(0,1fr)}.grid{grid-template-columns:minmax(0,1fr)}.top>.mainband .meters{grid-template-columns:repeat(3,minmax(0,1fr));gap:0 1.5ch}.top>.hd{text-align:left}.topbar{justify-content:flex-start}}
+@media (max-width:600px){.top>.mainband .meters{grid-template-columns:minmax(0,1fr)}.fcols{grid-template-columns:minmax(0,1fr)}.ftally{display:none}.top>.mainband .facts{white-space:normal}body{padding:10px;font-size:16px}}

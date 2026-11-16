@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.2
+
+- The web view no longer scrolls sideways on narrow windows. Grid tracks shrink below their content, the main box keeps its three meters inside it and stacks them under 600px, and the tool trail keeps a readable path with the tally hidden on small screens.
+
 ## 0.6.1
 
 - On Claude Code before 2.1.299 the pane no longer empties, session log and all, once the first prompt is sent. Since 0.5.1 the connectors between panels asked for `Text`'s monospaced face (`mono`), which Claude Code has only from 2.1.299, and the first connector is drawn when a turn starts. Flightdeck now asks for that face only where `$.session.version()` reports 2.1.299 or later. Older versions draw the connectors in the default face, so on a graphical surface a running connector's right end may jitter again, as before 0.5.1. ([#29](https://github.com/scasella/claude-flightdeck/pull/29); [#28](https://github.com/scasella/claude-flightdeck/issues/28), thanks @Bexxs75 for tracing it to 0.5.1)
