@@ -162,7 +162,8 @@ async function say($: EngineInterface, who: string, text: string, kind: LogLine[
 }
 
 async function refreshStatus($: EngineInterface, cfg: Config) {
-  if (!cfg.statusLine) return $.ui.status(undefined)
+  // Herdr draws the agents and gate in its own panels, so its terminals carry no status entry.
+  if (!cfg.statusLine || (await $.env.get('HC_TERMINAL_ID'))) return $.ui.status(undefined)
   const [u, a, g, cards] = await Promise.all([getUsage($), getArchitect($), getGate($), getCards($)])
   const running = cards.filter(c => c.status === 'running').length
   const s = gateSummary(g)
