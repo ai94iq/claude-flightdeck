@@ -161,9 +161,12 @@ async function say($: EngineInterface, who: string, text: string, kind: LogLine[
   await update($, log, list => [...normalizeLog(list), line].slice(-60))
 }
 
+// Herdr terminals carry HC_TERMINAL_ID; a host that cannot read the environment is not Herdr.
+const inHerdr = async ($: EngineInterface) => Boolean(await $.env.get('HC_TERMINAL_ID').catch(() => undefined))
+
 async function refreshStatus($: EngineInterface, cfg: Config) {
   // Herdr draws the agents and gate in its own panels, so its terminals carry no status entry.
-  if (!cfg.statusLine || (await $.env.get('HC_TERMINAL_ID'))) return $.ui.status(undefined)
+  if (!cfg.statusLine || (await inHerdr($))) return $.ui.status(undefined)
   const [u, a, g, cards] = await Promise.all([getUsage($), getArchitect($), getGate($), getCards($)])
   const running = cards.filter(c => c.status === 'running').length
   const s = gateSummary(g)
@@ -343,8 +346,7 @@ export const register: Register = (on, options) => {
       }))
     }
     // Herdr has its own Flightdeck panel; a docked pane there garbles the terminal's mouse input.
-    const inHerdr = await $.env.get('HC_TERMINAL_ID').catch(() => undefined)
-    if (cfg.openOnStart && !inHerdr) void openPane($, cfg).catch(() => undefined)
+    if (cfg.openOnStart && !(await inHerdr($))) void openPane($, cfg).catch(() => undefined)
     startFeed($)
     await refreshStatus($, cfg)
     const done = await next(e)

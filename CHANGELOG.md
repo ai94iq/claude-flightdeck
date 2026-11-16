@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.4
+
+- A host that cannot read environment variables no longer skips the status and measurement hooks: the Herdr check now treats a failed read as not Herdr. This fixes the 9 failing CI tests.
+
 ## 0.7.3
 
 - Inside a Herdr terminal the pane no longer opens by itself at session start. Herdr has its own Flightdeck panel, and the docked pane left mouse reports typed into the shell after Claude Code exited. `/flightdeck` still opens it there.
