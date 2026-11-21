@@ -369,6 +369,14 @@ test('session feed scripts key by session, escape the tag and list fresh session
   expect(toFocusScript('k2')).toBe('window.FD_FOCUS="k2";\n')
 })
 
+test('feed scripts escape the line and paragraph separators', () => {
+  const sep = String.fromCharCode(0x2028) + String.fromCharCode(0x2029)
+  const s = toFocusScript(`a${sep}b`)
+  expect(s).not.toContain(String.fromCharCode(0x2028))
+  expect(s).not.toContain(String.fromCharCode(0x2029))
+  expect(s).toContain('\\u2028\\u2029')
+})
+
 test('/clear starts the pane fresh', async ($, on) => {
   engine(on)
   on('session.end', (_$, e) => ({ sessionId: e.sessionId }))

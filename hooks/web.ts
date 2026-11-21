@@ -125,8 +125,12 @@ export function toWeb({ m, u, g, cards, loops, lines, receipt, now }: WebInput) 
   }
 }
 
-/** `<` is escaped so no text closes the script tag. */
-const asScript = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c')
+/** `<` is escaped so no text closes the script tag; U+2028/9 so older engines parse the line. */
+const asScript = (value: unknown) =>
+  JSON.stringify(value)
+    .replace(/</g, '\\u003c')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029')
 
 /** A session's feed file name (no extension), safe on every file system and as a DOM id. */
 export const feedKey = (sessionId: string) => sessionId.replace(/[^\w-]/g, '_')
