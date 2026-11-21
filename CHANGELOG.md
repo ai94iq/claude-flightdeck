@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.7.5
 
+- A long tool name (an MCP tool, say) no longer squeezes the command beside it to nothing in the agent detail tool trail: the name is cut with an ellipsis and shows in full on hover.
 - Web feed scripts escape U+2028 and U+2029, so engines older than ES2019 still parse a feed that holds them.
 - The web page sets a strict Content Security Policy: scripts, styles and fonts load only from its own folder, inline scripts do not run, and the page makes no connections.
 

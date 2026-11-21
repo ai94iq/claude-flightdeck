@@ -112,5 +112,6 @@ body,body *{transition:color .2s ease-out,background-color .2s ease-out,border-c
 .meter .row .r{flex:none;margin-left:auto}
 .ftrail .row .t,.ftally .row{min-width:0}
 .ftrail .row{overflow:hidden}
+.ftrail .row>.c-agent,.ftally .row>.c-agent{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}.ftrail .row>.c-agent{max-width:40%}.ftrail .row>.t{flex:1 1 0;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:900px){.top{grid-template-columns:minmax(0,1fr)}.grid{grid-template-columns:minmax(0,1fr)}.top>.mainband .meters{grid-template-columns:repeat(3,minmax(0,1fr));gap:0 1.5ch}.top>.hd{text-align:left}.topbar{justify-content:flex-start}}
 @media (max-width:600px){.top>.mainband .meters{grid-template-columns:minmax(0,1fr)}.fcols{grid-template-columns:minmax(0,1fr)}.ftally{display:none}.top>.mainband .facts{white-space:normal}body{padding:10px;font-size:16px}}

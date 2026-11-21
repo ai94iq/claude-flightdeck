@@ -7,8 +7,8 @@
     ${r.length&&e.earlier?F`<div class="faint">${`+`+e.earlier+` earlier`}</div>`:null}
     ${r.map((e,n)=>F`<${Ut} key=${n+`:`+e.label} c=${e} i=${n} sel=${t}/>`)}
   </section>`}function Gt({tools:e}){let t={};return e.forEach(e=>{let n=e.split(` `)[0];t[n]=(t[n]||0)+1}),F`<div class="fcols">
-    <div class="ftrail"><div class="faint sec">tool trail</div>${e.map((e,t)=>{let n=e.split(` -> `);return F`<div class="row"><span class="faint">${String(t+1).padStart(2,` `)}</span><span class="c-agent b">${n[0]}</span><span class="t">${n.slice(1).join(` -> `)}</span></div>`})}</div>
-    <div class="ftally"><div class="faint sec">tools used</div>${Object.keys(t).map(e=>F`<div class="row"><span class="c-agent">${e}</span><span class="r b">${t[e]}</span></div>`)}</div>
+    <div class="ftrail"><div class="faint sec">tool trail</div>${e.map((e,t)=>{let n=e.split(` -> `);return F`<div class="row"><span class="faint">${String(t+1).padStart(2,` `)}</span><span class="c-agent b" title=${n[0]}>${n[0]}</span><span class="t" title=${n.slice(1).join(` -> `)}>${n.slice(1).join(` -> `)}</span></div>`})}</div>
+    <div class="ftally"><div class="faint sec">tools used</div>${Object.keys(t).map(e=>F`<div class="row"><span class="c-agent" title=${e}>${e}</span><span class="r b">${t[e]}</span></div>`)}</div>
   </div>`}function Kt({c:e,i:t}){let n=e.state===`error`?`c-warn`:e.state===`running`?`c-agent`:`c-gate`,r=[[`type`,e.type],[`model`,e.model],[`state`,e.state],[`steps`,e.steps],[`elapsed`,e.t]];return F`<section class=${`box `+n+` focus fill`}>
     <div class="row"><${Vt} state=${e.state}/><span class="b t ftitle">${t+1+`: `+e.label}</span><span class="r dim">[ ] prev/next</span></div>
     <div class="fmeta">${r.map(t=>F`<span><span class="dim">${t[0]+` `}</span><span class=${`b `+(t[0]===`state`?Dt[e.state]:``)}>${t[1]}</span></span>`)}</div>

@@ -25,8 +25,8 @@ function ToolTrail({ tools }) {
   const counts = {};
   tools.forEach((t) => { const n = t.split(" ")[0]; counts[n] = (counts[n] || 0) + 1; });
   return html`<div class="fcols">
-    <div class="ftrail"><div class="faint sec">tool trail</div>${tools.map((t, j) => { const parts = t.split(" -> "); return html`<div class="row"><span class="faint">${String(j + 1).padStart(2, " ")}</span><span class="c-agent b">${parts[0]}</span><span class="t">${parts.slice(1).join(" -> ")}</span></div>`; })}</div>
-    <div class="ftally"><div class="faint sec">tools used</div>${Object.keys(counts).map((n) => html`<div class="row"><span class="c-agent">${n}</span><span class="r b">${counts[n]}</span></div>`)}</div>
+    <div class="ftrail"><div class="faint sec">tool trail</div>${tools.map((t, j) => { const parts = t.split(" -> "); return html`<div class="row"><span class="faint">${String(j + 1).padStart(2, " ")}</span><span class="c-agent b" title=${parts[0]}>${parts[0]}</span><span class="t" title=${parts.slice(1).join(" -> ")}>${parts.slice(1).join(" -> ")}</span></div>`; })}</div>
+    <div class="ftally"><div class="faint sec">tools used</div>${Object.keys(counts).map((n) => html`<div class="row"><span class="c-agent" title=${n}>${n}</span><span class="r b">${counts[n]}</span></div>`)}</div>
   </div>`;
 }
 
