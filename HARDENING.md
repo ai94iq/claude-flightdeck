@@ -14,5 +14,7 @@ Changes on top of upstream release 0.6.1 (bf43317), from a security audit.
 | 8 | `shorten()` kept terminal control bytes (ESC, C1 CSI) from tool and agent text | control bytes stripped before whitespace collapse and the cut | `shorten strips control bytes before collapsing` |
 | 9 | URL-credential pattern backtracked quadratically: `redact('a.'.repeat(200000))` took 25.8 s | scheme quantifier bounded to `{0,31}`; description and answer sliced to 4x their cut before `redact()` | `redact stays fast on a long dotted input` (under 200 ms) |
 | 10 | Architect advice reached state and the log unredacted | `redact()` in `consultEnded`, `noteAdvice` (stored and logged) and `adviceLine`; the repeat check compares the redacted text | `architect advice line masks credentials` |
+| 11 | Feed scripts kept U+2028/U+2029 raw from `JSON.stringify`; engines before ES2019 stop parsing the feed | `asScript` in `hooks/web.ts` escapes both, with `<` | `feed scripts escape the line and paragraph separators` |
+| 12 | The web page had no Content Security Policy | `web/index.html` (and `web-src/public/index.html`): `default-src 'none'`, scripts, styles and fonts from the page folder only, no inline script, no connections, no forms | Headless Chromium on `file://`: a live feed still renders with no violations, and an injected inline script is blocked. The plugin test sandbox cannot read files, so this has no suite test |
 
 Run: `claude plugin test .` and `claude plugin validate .`.

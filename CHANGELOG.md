@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Web feed scripts escape U+2028 and U+2029, so engines older than ES2019 still parse a feed that holds them.
+- The web page sets a strict Content Security Policy: scripts, styles and fonts load only from its own folder, inline scripts do not run, and the page makes no connections.
+
 ## 0.7.4
 
 - A host that cannot read environment variables no longer skips the status and measurement hooks: the Herdr check now treats a failed read as not Herdr. This fixes the 9 failing CI tests.
